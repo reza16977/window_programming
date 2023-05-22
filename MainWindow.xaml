@@ -1,0 +1,70 @@
+﻿<Window x:Class="week12_2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:week12_2.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+
+    <Grid>
+        <ListBox x:Name="listBox" ItemsSource="{Binding Cars}"  SelectedItem="{Binding SelectedCar}" Margin="125,32,449,140">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Company : "/>
+                            <TextBlock Text="{Binding Path=Company}"/>
+
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Model :"/>
+                            <TextBlock Text="{Binding Path=Model}"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Color : "/>
+                            <Border Height="10" Width="100" HorizontalAlignment="Left">
+                                <Border.Background>
+                                    <SolidColorBrush Color="{Binding CarColor}"/>
+                                </Border.Background>
+                            </Border>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Price :"/>
+                            <Slider Height="22" Width="116" Value="{Binding Price}" Maximum="10000"/>
+                            <TextBlock Text="{Binding Path=Price}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="Company" HorizontalAlignment="Center" Margin="0,70,0,0" VerticalAlignment="Top"/>
+        <Label Content="Model" HorizontalAlignment="Center" Margin="0,122,0,0" VerticalAlignment="Top"/>
+        <Label Content="Color" HorizontalAlignment="Center" Margin="0,193,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBoxCompany" Text="{Binding NewCar.Company}" HorizontalAlignment="Left" Margin="467,78,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBoxModel" Text="{Binding NewCar.Model}" HorizontalAlignment="Left" Margin="467,129,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboBox" ItemsSource="{Binding CarColors}" SelectedItem="{Binding NewCar.CarColor}" HorizontalAlignment="Left" Margin="467,190,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="10" Width="100" HorizontalAlignment="Left" Margin="5">
+                        <Border.Background>
+                            <SolidColorBrush Color="{Binding}"/>
+                        </Border.Background>
+                    </Border>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button Name="buttonAdd" Content="Add" Command="{Binding AddCar}" HorizontalAlignment="Left" Margin="400,300,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button Name="buttonModify" Content="Modify" Command="{Binding ModifyCar}" HorizontalAlignment="Left" Margin="507,300,0,0" VerticalAlignment="Top" Width="65"/>
+        <Button Name="buttonDelete" Content="Delete" Command="{Binding DeleteCar}" HorizontalAlignment="Left" Margin="615,300,0,0" VerticalAlignment="Top" Width="65"/>
+        <Label Content="Price" HorizontalAlignment="Center" Margin="0,252,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="PriceBox" Text="{Binding NewCar.Price}" HorizontalAlignment="Left" Margin="467,256,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+
+
+    </Grid>
+</Window>
